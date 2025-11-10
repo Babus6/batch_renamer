@@ -23,6 +23,7 @@ print_help(){
 	cat "README"
 }
 
+#just a line to mess with git
 start_log () {
 	local timestamp=$(date '+%F %T')
 	local extension=$EXTENSION
