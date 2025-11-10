@@ -1,0 +1,68 @@
+==============================================================================================
+Welcome the the Batch Renamer by Babus:
+This script renames all of the files of a user-specified type, into a specific format 
+	(e.g ./rename.sh txt ==> renames all of the ".txt" files of the current directory
+	as follows: YYYYMMDD_001.txt, YYYYMMDD_002.txt etc.)
+=============================================================================================
+
+The program can be run as follows:
+
+1) ./rename.sh --help
+	prints this page
+2) ./rename.sh [--verbose] [--dry-run] ext
+	
+	ext:    This is the type of file that the script works with. In can be any combination of letters. In case this arguments does not consist of only letters,
+		an error message is printed and the script terminates. (exit code:2)
+		If there are no ".txt" files inside the current directory, a message is printed and the script exits. (exit code:0)
+	
+	verbose: This mode gives the user some more info about what is happening during execution. More specifically, it gives information about creation 
+                 of log directory and log files.
+
+	dry-run: This is the "safe-mode" of the script. Instead of actually renaming files, it just prints messages about what would be exeuted.
+
+	The script can be run with no complementary argument, one complementary argument, or two complementary arguments in no specific order. In any case, 
+	the complementary arguments, if any, must be followed by the user-specified extension.
+
+	Below, you can find all of the valid executions (pdf extension). In any other case an error message will be printed and the script will terminate (error code:2)
+		1) ./rename.sh pdf
+		2) ./rename.sh --dry-run pdf
+		3) ./rename.sh --verbose pdf
+		4) ./rename.sh --dry-run --verbose pdf
+		5) ./rename.sh --verbose --dry-run pdf
+	The script also prints an error message and exits(exit code:2) in case of typing errors:
+		1) ./rename.sh -verbose pdf
+		2) ./rename.sh --dry-urn pdf
+		3) ./rename.sh --verbose .pdf
+
+Under the hood:
+
+	1) The script firstly parses the arguments to ensure correct input, as described above.
+	2) A welcome message is printed.
+	3) A log directory is created, if it does not already exist. (./logs)
+	4) A log file for the current day is created, if it does not already exist (./logs/YYYYMMDD_log.txt)
+	5) The script parses all of the files of the specified type that exist inside the working directory (only on this level, not recursively)
+	6) It separates the file in 2 lists. Those that already have a name of the correct format, and those who don't
+	7) The script only renames the files that are not named in the correct format.
+	8) Everything that is executed inside the script is written in today's log file (./logs/"today's_date"_log.txt)
+
+In order to understand how the script works and test it, you can run "./tester.sh"
+	This script creates some txt files:
+		0-10 files that preceed YYYYMMDD, such as 11111.txt, (pre-files) 
+		0-10 of the correct format, such as 20251110_001.txt, (files)
+		0-10 files that come after YYYYMMDD, such as 33333.txt, (post-files).
+	After the creation of the files, it runs the original "./rename.sh" script to start renaming and everything is written
+	inside today's log. After the renaming of the files is completed, all of the .txt files are deleted. 
+	This process is repeated 100 times.
+
+	In corner cases:
+		1) 0 pre-files 			2) 0 files 				3) 0 post-files 	
+		4) 0 pre-files and 0 files	5) 0 pre-files and 0 post-files 	6) 0 files and 0 post-files
+		7) 0 pre-files 0 files 0 post files
+		
+	the script works properly.
+	
+	!It is advised that you run the tester in this directory for educational and testing purposes. When ready to use, you can copy the "rename.sh"
+	inside your desired folder and start renaming!!!
+
+For more information, contact me: panosx9797@gmail.com
+===================================================================================================================

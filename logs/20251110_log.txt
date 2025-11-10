@@ -1,0 +1,13 @@
+#rename.sh log started at 2025-11-10 20:45:11
+#Mode:EXE
+#Directory:/home/vboxuser/bash_scripts/batch_rename
+#Extension:asdf
+--------------------------------------------
+The following files already have a name that matches the destination format. Rename will be skipped:
+-
+The following files will be renamed:
+-
+No files with the specified extension were found
+Completed 0 actions and skipped 0
+----------------------------------------------
+
